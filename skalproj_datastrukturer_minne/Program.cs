@@ -22,7 +22,9 @@ namespace SkalProj_Datastrukturer_Minne
                     + "\n2. Examine a Queue"
                     + "\n3. Examine a Stack"
                     + "\n4. Reverse String"
-                    + "\n5. CheckParanthesis"
+                    + "\n5. Check Paranthesis"
+                    + "\n6. Examine Recursion"
+                    + "\n7. Examine Iteration"
                     + "\n0. Exit the application");
                 char input = ' '; //Creates the character input to be used with the switch-case below.
                 try
@@ -50,6 +52,12 @@ namespace SkalProj_Datastrukturer_Minne
                         break;
                     case '5':
                         CheckParanthesis();
+                        break;
+                    case '6':
+                        ExamineRecursion();
+                        break;
+                    case '7':
+                        ExamineIteration();
                         break;
                     /*
                      * Extend the menu to include the recursive 
@@ -303,5 +311,120 @@ namespace SkalProj_Datastrukturer_Minne
             else
                 Console.WriteLine("\nYour input string is INVALID.\n");
         }
+
+        static void ExamineRecursion()
+        {
+            Console.WriteLine("Enter the integer value of n to find nth odd and even number:");
+            
+            if (Int32.TryParse(Console.ReadLine(), out int n))
+            {
+                Console.WriteLine("The "+ n + "st/nd/rd/th odd number is " + RecursiveOdd(n));
+                Console.WriteLine("The " + n + "st/nd/rd/th even number is " + RecursiveEven(n));
+                Console.WriteLine("The " + n + "st/nd/rd/th fibonacci number is " + RecursiveFibonacciSequence(n));
+            }
+            else
+                Console.WriteLine("You entered non-integer value for n.");
+        }
+
+        public static int RecursiveOdd(int n)
+        {
+            if (n == 0)
+            {
+                return 1;
+            }
+            return (RecursiveOdd(n - 1) + 2);
+        }
+
+        public static int RecursiveEven(int n)
+        {
+            if (n == 0)
+            {
+                return 0;
+            }
+            return (RecursiveEven(n - 1) + 2);
+        }
+
+        public static int RecursiveFibonacciSequence(int n)
+        {
+            var seq =0;
+
+            if (n == 0 || n == 1)
+                seq= n;
+            else
+            {
+                seq = RecursiveFibonacciSequence(n - 1) + RecursiveFibonacciSequence(n - 2);
+            }
+            return seq;
+        }
+
+        static void ExamineIteration()
+        {
+            Console.WriteLine("Enter the integer value of n to find nth odd and even number:");
+
+            if (Int32.TryParse(Console.ReadLine(), out int n))
+            {
+                Console.WriteLine("The " + n + "st/nd/rd/th odd number is " + IterativeOdd(n));
+                Console.WriteLine("The " + n + "st/nd/rd/th even number is " + IterativeEven(n));
+                Console.WriteLine("The " + n + "st/nd/rd/th fibonacci number is " + IterativeFibonacciSequence(n));
+            }
+            else
+                Console.WriteLine("You entered non-integer value for n.");
+        }
+
+        public static int IterativeOdd(int n)
+        {
+            if (n == 0)
+            {
+                return 1;
+            }
+
+            int result = 1;
+
+            for (int i=0; i<=n; i++)
+            {
+                result += 2;
+            }
+            return result;
+        }
+
+        public static int IterativeEven(int n)
+        {
+            if (n == 0)
+            {
+                return 1;
+            }
+
+            int result = 0;
+
+            for (int i = 0; i <= n; i++)
+            {
+                result += 2;
+            }
+            return result;
+        }
+
+        public static int IterativeFibonacciSequence(int n)
+        {
+           int a = 0, b = 1, c = 0;
+
+            if (n == 0 || n == 1 || n == 2)
+                c = n;
+            else
+            {
+                for (int i=2; i < n; i++)
+                {
+                    c = a + b;
+
+                    Console.Write(" {0}", c);
+
+                    a = b;
+
+                    b = c;
+                }
+
+            }
+            return c;
+        }
+
     }
 }
