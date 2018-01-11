@@ -8,10 +8,25 @@ namespace SkalProj_Datastrukturer_Minne
 {
     class Program
     {
-        /// <summary>
-        /// The main method, vill handle the menues for the program
-        /// </summary>
-        /// <param name="args"></param>
+        /*
+        *Q1: Hur fungerar stacken och heapen? Förklara gärna med exempel eller skiss på dess grundläggande funktion.
+        *A2: Stack is used for static memory allocation and Heap for dynamic memory allocation, both stored in the computer's RAM . 
+        * Variables allocated on the stack are stored directly to the memory and access to this memory is very fast, and it's allocation is dealt with when the program is compiled.
+        * Variables allocated on the heap have their memory allocated at run time and accessing this memory is a bit slower, but the heap size is only limited by the size of virtual memory. 
+        * Element of the heap have no dependencies with each other and can always be accessed randomly at any time. You can allocate a block at any time and free it at any time.
+        * You can use the stack if you know exactly how much data you need to allocate before compile time and it is not too big.	
+        * You can use heap if you don't know exactly how much data you will need at runtime or if you need to allocate a lot of data.
+        * bool, int, float, double are stored on stack, whereas object, class, interface, delegate, string are stored on a heap.
+        * 
+        * Q2: Vad är Value Types repsektive Reference Types och vad skiljer dem åt?
+        * A2: A Value Type holds the data within its own memory allocation and a Reference Type contains a pointer to another memory location that holds the real data.
+        * Value types are stored on stack whereas reference type are stored on heap.
+        * 
+        * Q3: Följande metoder (se bild nedan) genererar olika svar. Den första returnerar 3, den andra returnerar 4, varför?
+        * A3: The first method is returning a value type value (int). When y changes x does not chage. Whereas the second method is returning a value in a reference type variable. 
+        * When Y changes X also changes.
+        */
+
         static void Main()
         {
             while (true)
@@ -259,40 +274,52 @@ namespace SkalProj_Datastrukturer_Minne
                     switch (character)
                     {
                         case ')':
-                            if (stack.Peek() == '(')
+                            if (stack.Any())
                             {
-                                stack.Pop();
-                                run = true;
+                                if (stack.Peek() == '(')
+                                {
+                                    stack.Pop();
+                                    run = true;
+                                }
+                                else
+                                    run = false;
                             }   
-                             else
-                                run = false;
                             break;
                         case ']':
-                            if (stack.Peek() == '[')
+                            if (stack.Any())
                             {
-                                stack.Pop();
-                                run = true;
+                                if (stack.Peek() == '[')
+                                {
+                                    stack.Pop();
+                                    run = true;
+                                }
+                                else
+                                    run = false;
                             }
-                            else
-                                run = false;
                             break;
                         case '}':
-                            if (stack.Peek() == '{')
+                            if (stack.Any())
                             {
-                                stack.Pop();
-                                run = true;
+                                if (stack.Peek() == '{')
+                                {
+                                    stack.Pop();
+                                    run = true;
+                                }
+                                else
+                                    run = false;
                             }
-                            else
-                                run = false;
                             break;
                         case '>':
-                            if (stack.Peek() == '<')
+                            if (stack.Any())
                             {
-                                stack.Pop();
-                                run = true;
+                                if (stack.Peek() == '<')
+                                {
+                                    stack.Pop();
+                                    run = true;
+                                }
+                                else
+                                    run = false;
                             }
-                            else
-                                run = false;
                             break;
                         default:
                             run = false;
@@ -306,7 +333,7 @@ namespace SkalProj_Datastrukturer_Minne
                 }
             }
             
-            if (run)
+            if (run && stack.Count()==0)
                 Console.WriteLine("\nYour input string is VALID.\n");
             else
                 Console.WriteLine("\nYour input string is INVALID.\n");
